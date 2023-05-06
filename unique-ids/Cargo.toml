@@ -1,0 +1,11 @@
+[package]
+name = "unique-ids"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+maelstrom-node = "0.1.6"
+async-trait = "0.1.68"
+serde_json = "1.0.96"
