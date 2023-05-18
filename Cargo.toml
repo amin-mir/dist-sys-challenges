@@ -3,4 +3,5 @@
 members = [
     "unique-ids",
     "broadcast",
+    "g-counter",
 ]

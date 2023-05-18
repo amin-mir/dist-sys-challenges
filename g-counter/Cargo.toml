@@ -1,0 +1,13 @@
+[package]
+name = "g-counter"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+async-trait = "0.1.68"
+maelstrom-node = "0.1.6"
+serde = "1.0.163"
+serde_json = "1.0.96"
+tokio-context = "0.1.3"
