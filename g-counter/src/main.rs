@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use async_trait::async_trait;
-use maelstrom::kv::{lin_kv, Storage, KV};
+use maelstrom::kv::{seq_kv, Storage, KV};
 use maelstrom::protocol::Message;
 use maelstrom::{done, Node, Result, Runtime};
 use serde::{Deserialize, Serialize};
@@ -22,7 +22,7 @@ struct Handler {
 impl Handler {
     fn new(runtime: Runtime) -> Handler {
         Handler {
-            storage: lin_kv(runtime),
+            storage: seq_kv(runtime),
         }
     }
 }
