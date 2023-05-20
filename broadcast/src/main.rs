@@ -32,7 +32,17 @@ impl Node for Handler {
         match broadcast_msg {
             Ok(BroadcastMessage::Broadcast { message }) => {
                 self.inner.lock().unwrap().data.push(message);
+
+                for node in runtime.neighbours() {
+                    let msg = BroadcastMessage::InternalBroadcast { message };
+                    runtime.call_async(node, msg);
+                }
+
                 runtime.reply(req, BroadcastMessage::BroadcastOk).await
+            }
+            Ok(BroadcastMessage::InternalBroadcast { message }) => {
+                self.inner.lock().unwrap().data.push(message);
+                runtime.reply(req, BroadcastMessage::InterBroadcastOk).await
             }
             Ok(BroadcastMessage::Read) => {
                 let data = self.inner.lock().unwrap().data.clone();
@@ -58,6 +68,10 @@ enum BroadcastMessage {
         message: i64,
     },
     BroadcastOk,
+    InternalBroadcast {
+        message: i64,
+    },
+    InterBroadcastOk,
     Read,
     ReadOk {
         messages: Vec<i64>,

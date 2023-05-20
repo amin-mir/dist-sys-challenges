@@ -23,6 +23,7 @@ struct Handler {
 impl Handler {
     fn new(runtime: Runtime) -> Handler {
         Handler {
+            // Linearizability: https://jepsen.io/consistency/models/linearizable
             storage: lin_kv(runtime),
         }
     }

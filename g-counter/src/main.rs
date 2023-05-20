@@ -22,6 +22,7 @@ struct Handler {
 impl Handler {
     fn new(runtime: Runtime) -> Handler {
         Handler {
+            // Sequential consistency: https://jepsen.io/consistency/models/sequential
             storage: seq_kv(runtime),
         }
     }
